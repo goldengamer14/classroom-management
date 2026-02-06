@@ -9,29 +9,26 @@ import routerProvider, {
 } from "@refinedev/react-router";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import "./App.css";
-import { ErrorComponent } from "./components/refine-ui/layout/error-component";
 import { Layout } from "./components/refine-ui/layout/layout";
 import { Toaster } from "./components/refine-ui/notification/toaster";
 import { useNotificationProvider } from "./components/refine-ui/notification/use-notification-provider";
 import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
-import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "./pages/blog-posts";
-import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "./pages/categories";
+
 import { dataProvider } from "./providers/data";
 
+import { Dashboard } from "./lib/dashboard";
+import { SubjectsList } from "./pages/subjects/list";
+import { SubjectsCreate } from "./pages/subjects/create";
+import { Home, BookOpen } from "lucide-react";
+
 function App() {
+  dataProvider.getList({ resource: "subjects" }).then(response => {
+    console.log("Fetched subjects:", response.data);
+  }).catch(error => {
+    console.error("Error fetching subjects:", error);
+  });
   return (
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         <ThemeProvider>
           <DevtoolsProvider>
@@ -41,23 +38,19 @@ function App() {
               routerProvider={routerProvider}
               resources={[
                 {
-                  name: "blog_posts",
-                  list: "/blog-posts",
-                  create: "/blog-posts/create",
-                  edit: "/blog-posts/edit/:id",
-                  show: "/blog-posts/show/:id",
-                  meta: {
-                    canDelete: true,
-                  },
+                  name: "Dashboard",
+                  list: "/",
+                  meta: { label: "Home", icon: <Home /> },
                 },
                 {
-                  name: "categories",
-                  list: "/categories",
-                  create: "/categories/create",
-                  edit: "/categories/edit/:id",
-                  show: "/categories/show/:id",
+                  name: "Subjects",
+                  list: "/subjects",
+                  create: "/subjects/create",
+                  edit: "/subjects/edit/:id",
+                  show: "/subjects/show/:id",
                   meta: {
-                    canDelete: true,
+                    label: "Subjects",
+                    icon: <BookOpen />
                   },
                 },
               ]}
@@ -68,30 +61,15 @@ function App() {
               }}
             >
               <Routes>
-                <Route
-                  element={
-                    <Layout>
-                      <Outlet />
-                    </Layout>
-                  }
+                <Route element={
+                  <Layout>
+                    <Outlet />
+                  </Layout>
+                }
                 >
-                  <Route
-                    index
-                    element={<NavigateToResource resource="blog_posts" />}
-                  />
-                  <Route path="/blog-posts">
-                    <Route index element={<BlogPostList />} />
-                    <Route path="create" element={<BlogPostCreate />} />
-                    <Route path="edit/:id" element={<BlogPostEdit />} />
-                    <Route path="show/:id" element={<BlogPostShow />} />
-                  </Route>
-                  <Route path="/categories">
-                    <Route index element={<CategoryList />} />
-                    <Route path="create" element={<CategoryCreate />} />
-                    <Route path="edit/:id" element={<CategoryEdit />} />
-                    <Route path="show/:id" element={<CategoryShow />} />
-                  </Route>
-                  <Route path="*" element={<ErrorComponent />} />
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/subjects" element={<SubjectsList />} />
+                  <Route path="/subjects/create" element={<SubjectsCreate />} />
                 </Route>
               </Routes>
 
@@ -100,7 +78,6 @@ function App() {
               <UnsavedChangesNotifier />
               <DocumentTitleHandler />
             </Refine>
-            <DevtoolsPanel />
           </DevtoolsProvider>
         </ThemeProvider>
       </RefineKbarProvider>
