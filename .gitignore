@@ -1,3 +1,11 @@
+*.exe
+*.dat
+*.bin
+*.md
+*.env
+*node_modules
+classroom-backend/drizzle
+
 # Logs
 
 logs
