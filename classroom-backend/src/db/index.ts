@@ -1,8 +1,11 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
+import * as dotenv from "dotenv"
+import { resolve } from "path";
 import * as schema from "./schema/index.ts";
 
-console.log(schema);
+console.log(resolve(process.cwd(), "src", ".env"));
+dotenv.config({ path: resolve(process.cwd(), "src", ".env") });
 
 if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL is not defined in environment variables");

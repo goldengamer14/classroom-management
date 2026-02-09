@@ -7,6 +7,8 @@ import { CreateButton } from "@/components/refine-ui/buttons/create";
 import { DataTable } from "@/components/refine-ui/data-table/data-table.tsx";
 import { ColumnDef } from "@tanstack/react-table";
 
+import { RequestHandler } from "@/pages/subjects/tempRequests";
+
 // Javascript Components
 import { useMemo, useState } from "react";
 import { DEPARTMENT_OPTIONS } from "@/constants/index.ts";
@@ -121,6 +123,12 @@ export const SubjectsList = () => {
       </div>
 
       <DataTable table={subjectTable} />
+
+      {/* TEMPORARY SECTION */}
+
+      <RequestHandler />
+
+      {/* TEMPORARY SECTION */}
     </ListView>
   );
 }
