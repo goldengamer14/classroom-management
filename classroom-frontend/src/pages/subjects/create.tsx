@@ -1,5 +1,7 @@
-export const SubjectsCreate = () => {
+const SubjectsCreate = () => {
   return (
     <div>Create</div>
   );
 };
+
+export default SubjectsCreate;

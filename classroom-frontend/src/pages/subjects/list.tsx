@@ -13,16 +13,16 @@ import { RequestHandler } from "@/pages/subjects/tempRequests";
 import { useMemo, useState } from "react";
 import { DEPARTMENT_OPTIONS } from "@/constants/index.ts";
 import { useTable } from "@refinedev/react-table";
-import { Subject } from "@/types/index.ts";
+import { Department, Subject } from "@/types/index.ts";
 
-export const SubjectsList = () => {
+const SubjectsList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("all");
 
   const deptFilter = selectedDepartment !== "all"
     ? [{ field: "department", operator: "eq" as const, value: selectedDepartment }]
     : [];
-  const searchFilter = searchQuery ? [{ field: "name", operator: "contains" as const, value: searchQuery }] : [];
+  const searchFilter = searchQuery ? [{ field: "name", operator: "includesString" as const, value: searchQuery }] : [];
 
   const subjectTable = useTable<Subject>({
     columns: useMemo<ColumnDef<Subject>[]>(() => [
@@ -43,7 +43,7 @@ export const SubjectsList = () => {
       },
       {
         id: "department",
-        accessorKey: "department",
+        accessorKey: "department.name",
         size: 150,
         header: () => <p className="column-title">Department</p>,
         cell: ({ getValue }) => <span className="text-foreground">{getValue<string>()?.toUpperCase()}</span>
@@ -132,3 +132,5 @@ export const SubjectsList = () => {
     </ListView>
   );
 }
+
+export default SubjectsList;

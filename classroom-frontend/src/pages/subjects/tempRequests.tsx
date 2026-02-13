@@ -49,12 +49,7 @@ export const RequestHandler = () => {
         justifyContent: "space-evenly"
     };
 
-    const inputStyle = {
-        backgroundColor: "#353535",
-        color: "#ececec",
-        border: "2px solid #f0f0f0",
-        padding: "0.5rem"
-    };
+    const optionsStyle = { backgroundColor: "rgb(26, 26, 26)" };
 
     return (
         <div style={{
@@ -65,16 +60,16 @@ export const RequestHandler = () => {
             textAlign: "left"
         }}>
             <div style={flexDiv}>
-                <select value={requestType} onChange={(e) => setRequestType(e.target.value)} style={inputStyle}>
-                    <option value="GET">GET</option>
-                    <option value="POST">POST</option>
-                    <option value="PUT">PUT</option>
-                    <option value="DELETE">DELETE</option>
+                <select style={optionsStyle} value={requestType} onChange={(e) => setRequestType(e.target.value)}>
+                    <option value="GET" style={optionsStyle}>GET</option>
+                    <option value="POST" style={optionsStyle}>POST</option>
+                    <option value="PUT" style={optionsStyle}>PUT</option>
+                    <option value="DELETE" style={optionsStyle}>DELETE</option>
                 </select>
 
-                <select value={tableType} onChange={(e) => setTableType(e.target.value)} style={inputStyle}>
-                    <option value="subjects">Subject</option>
-                    <option value="departments">Department</option>
+                <select style={optionsStyle} value={tableType} onChange={(e) => setTableType(e.target.value)}>
+                    <option value="subjects" style={optionsStyle}>Subject</option>
+                    <option value="departments" style={optionsStyle}>Department</option>
                 </select>
 
                 <Input
@@ -82,7 +77,6 @@ export const RequestHandler = () => {
                     placeholder="ID"
                     value={id}
                     onChange={(e) => setId(e.target.value)}
-                    style={inputStyle}
                 />
             </div>
 
@@ -92,23 +86,20 @@ export const RequestHandler = () => {
                     placeholder="Code"
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
-                    style={inputStyle}
                 />
 
                 <Input
-                 type="number" 
-                 placeholder="Department ID"
-                 value={departmentId}
-                 onChange={e => setDepartmentId(e.target.value)}
-                 style={inputStyle}
-                 />
+                    type="number"
+                    placeholder="Department ID"
+                    value={departmentId}
+                    onChange={e => setDepartmentId(e.target.value)}
+                />
 
                 <Input
                     type="text"
                     placeholder="Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    style={inputStyle}
                 />
             </div>
 
@@ -118,7 +109,6 @@ export const RequestHandler = () => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     style={{
-                        ...inputStyle,
                         height: "8rem"
                     }}
                 />

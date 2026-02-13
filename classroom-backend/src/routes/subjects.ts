@@ -21,8 +21,8 @@ router.get("/", async (req, res) => {
         if (search)
             filterConditions.push(
                 or(
-                    ilike(subjects.name, String(search)),
-                    ilike(subjects.code, String(search))
+                    ilike(subjects.name, `%${String(search)}%`),
+                    ilike(subjects.code, `%${String(search)}%`)
                 )
             );
 

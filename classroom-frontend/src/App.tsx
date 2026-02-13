@@ -16,10 +16,12 @@ import { ThemeProvider } from "./components/refine-ui/theme/theme-provider";
 
 import { dataProvider } from "./providers/data";
 
-import { Dashboard } from "./lib/dashboard";
-import { SubjectsList } from "./pages/subjects/list";
-import { SubjectsCreate } from "./pages/subjects/create";
-import { Home, BookOpen } from "lucide-react";
+import { Dashboard } from "./pages/dashboard/dashboard";
+import SubjectsList from "./pages/subjects/list";
+import SubjectsCreate from "./pages/subjects/create";
+import ClassesList from "./pages/classes/list"
+import ClassesCreate from "./pages/classes/create"
+import { Home, BookOpen, GraduationCap } from "lucide-react";
 
 function App() {
   dataProvider.getList({ resource: "subjects" }).then(response => {
@@ -53,6 +55,17 @@ function App() {
                     icon: <BookOpen />
                   },
                 },
+                {
+                  name: "Classes",
+                  list: "/classes",
+                  create: "/classes/create",
+                  edit: "/classes/edit/:id",
+                  show: "/classes/show/:id",
+                  meta: {
+                    label: "Classes",
+                    icon: <GraduationCap />
+                  },
+                },
               ]}
               options={{
                 syncWithLocation: true,
@@ -68,8 +81,17 @@ function App() {
                 }
                 >
                   <Route path="/" element={<Dashboard />} />
-                  <Route path="/subjects" element={<SubjectsList />} />
-                  <Route path="/subjects/create" element={<SubjectsCreate />} />
+
+                  <Route path="subjects">
+                    <Route index element={<SubjectsList />} />
+                    <Route path="create" element={<SubjectsCreate />} />
+                  </Route>
+
+                  <Route path="classes">
+                    <Route index element={<ClassesList />} />
+                    <Route path="create" element={<ClassesCreate />} />
+                  </Route>
+
                 </Route>
               </Routes>
 

@@ -1,4 +1,5 @@
 *.exe
+*.log
 *.dat
 *.bin
 *.md
@@ -8,31 +9,38 @@ classroom-backend/drizzle
 
 # Logs
 
-logs
-_.log
-npm-debug.log_
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+classroom-backend/logs
+classroom-frontend/logs
+classroom-backend/_.log
+classroom-frontend/_.log
+*npm-debug.log_
+*yarn-debug.log*
+*yarn-error.log*
+*pnpm-debug.log*
+*lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+*dist
+*dist-ssr
 *.local
 
 # Environment variables
-.env
-.env.local
+*.env.local
 
 # Editor directories and files
 
 .vscode/_
 !.vscode/extensions.json
-.idea
-.DS_Store
-_.suo
-_.ntvs_
-_.njsproj
-_.sln
-\*.sw?
+classroom-frontend/.idea
+classroom-frontend/.DS_Store
+classroom-frontend/_.suo
+classroom-frontend/_.ntvs_
+classroom-frontend/_.njsproj
+classroom-frontend/_.sln
+classroom-frontend/\*.sw?
+classroom-backend/.idea
+classroom-backend/.DS_Store
+classroom-backend/_.suo
+classroom-backend/_.ntvs_
+classroom-backend/_.njsproj
+classroom-backend/_.sln
+classroom-backend/\*.sw?
