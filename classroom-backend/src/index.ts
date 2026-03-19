@@ -4,6 +4,7 @@ import { resolve } from "path";
 import * as dotenv from "dotenv";
 import { db, schema } from './db/index';
 import subjectsRouter from "./routes/subjects";
+import securityMiddleware from './middleware/security';
 
 const app = express();
 const PORT = 8000;
@@ -25,6 +26,9 @@ else console.warn("FRONTEND_URL doesn't satisfy the condition");
 
 app.use(express.json());
 // console.log('Database and schema imported:', db, schema);
+
+// Apply ARCJET Security Middleware globally
+app.use(securityMiddleware);
 
 // Middleware to log requests
 app.use((req, res, next) => {
